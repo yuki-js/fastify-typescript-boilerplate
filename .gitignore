@@ -16,6 +16,5 @@ npm-debug.log*
 .nyc_output
 coverage
 
-production.env
-
-package-lock.json
+*.env
+!*.example.env

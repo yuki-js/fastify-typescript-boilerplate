@@ -1,14 +1,20 @@
 import { NowRequestHandler } from 'fastify-now';
-import S from 'fluent-json-schema';
+import { Static, Type } from '@sinclair/typebox';
 
-export const GET: NowRequestHandler = async function () {
+const GetReply = Type.Object({
+  hello: Type.String(),
+});
+
+export const GET: NowRequestHandler<{
+  Reply: Static<typeof GetReply>;
+}> = async function () {
   return { hello: 'world' };
 };
 
 GET.opts = {
   schema: {
     response: {
-      200: S.object().prop('hello', S.string().required()),
+      200: GetReply,
     },
   },
 };
